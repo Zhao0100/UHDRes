@@ -15,3 +15,20 @@ We provide pretrained models for UHD-LL, UHD-Haze, UHD-Blur, and 4K-Rain13k.
 | 8KDehaze-mini| ---- |
 | UHD-Blur| ---- |
 | 4K-Rain13k| ---- |
+
+## Training
+
+
+## Testing
+
+
+### 4K Image LLIE
+![](https://github.com/Zhao0100/UHDRes/blob/main/Figs/ehrnet.pdf)
+### 4K Image Dehazing
+![](https://github.com/Zhao0100/UHDRes/blob/main/Figs/ehrnet.pdf)
+### 8K Image Dehazing
+![](https://github.com/Zhao0100/UHDRes/blob/main/Figs/ehrnet.pdf)
+### 4K Image Deblurring
+![](https://github.com/Zhao0100/UHDRes/blob/main/Figs/ehrnet.pdf)
+### 4K Image Deraining
+![](https://github.com/Zhao0100/UHDRes/blob/main/Figs/ehrnet.pdf)
