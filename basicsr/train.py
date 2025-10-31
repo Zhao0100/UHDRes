@@ -1,7 +1,7 @@
 import datetime
 import sys
 import os
-# 获取当前脚本所在目录
+
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.abspath(os.path.join(current_dir, '..'))
 sys.path.append(parent_dir)
@@ -10,7 +10,7 @@ import math
 import time
 import torch
 from os import path as osp
-# 现在可以安全导入basicsr模块
+
 from basicsr.data import build_dataloader, build_dataset
 from basicsr.data.data_sampler import EnlargedSampler
 from basicsr.data.prefetch_dataloader import CPUPrefetcher, CUDAPrefetcher
