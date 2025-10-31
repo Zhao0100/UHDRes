@@ -23,7 +23,7 @@ bash train.sh
 
 ## Testing
 ```python
-bash train.sh
+bash test.sh
 ```
 
 # Results
