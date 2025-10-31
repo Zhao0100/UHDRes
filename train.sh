@@ -1,1 +1,1 @@
-CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4 --master_port=4398 /home/jovyan/boomcheng-work-shcdt/zhaoshihao/code/UHD2/basicsr/train.py -opt /home/jovyan/boomcheng-work-shcdt/zhaoshihao/code/UHD2/options/train/AdaIR.yml --launcher pytorch
+CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4 --master_port=4398 ~/train.py -opt ~.yml --launcher pytorch
