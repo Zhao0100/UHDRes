@@ -27,17 +27,17 @@ bash train.sh
 ```
 
 ### 4K Image LLIE
-![](https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-LL_tab.png)
-![](https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-LL.png)
+<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-LL_tab.png" width="500px">
+<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-LL.png">
 ### 4K Image Dehazing
-![](https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-Haze_tab.png)
-![](https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-Haze.png)
+<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-Haze_tab.png" width="500px">
+<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-Haze.png">
 ### 8K Image Dehazing
-![](https://github.com/Zhao0100/UHDRes/blob/main/Figs/8KDehaze-mini_tab.png)
-![](https://github.com/Zhao0100/UHDRes/blob/main/Figs/8KDehaze-mini.png)
+<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/8KDehaze-mini_tab.png" width="500px">
+<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/8KDehaze-mini.png">
 ### 4K Image Deblurring
-![](https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-Blur_tab.png)
-![](https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-Blur.png)
+<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-Blur_tab.png" width="500px">
+<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-Blur.png">
 ### 4K Image Deraining
-![](https://github.com/Zhao0100/UHDRes/blob/main/Figs/4K-Rain13k_tab.png)
-![](https://github.com/Zhao0100/UHDRes/blob/main/Figs/4K-Rain13k.png)
+<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/4K-Rain13k_tab.png" width="500px">
+<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/4K-Rain13k.png">
