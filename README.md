@@ -6,7 +6,11 @@ We propose UHDRes, a UHD image restoration framework solely based on the frequen
 
 ## Dependencies and Installation
 * CUDA 11.8 (or later)
-* python 3.8 (or later)
+* PyTorch 2.0.0 (or later)
+```python
+cd UHDRes
+pip install -r requirements.txt
+```
 
 ## Datasets
 [UHD-LL](https://drive.google.com/drive/folders/1IneTwBsSiSSVXGoXQ9_hE1cO2d4Fd4DN), [UHD-Haze](https://drive.google.com/drive/folders/1PVCPkhqU_voPVFZj3FzAtUkJnQnF9lSa), [8KDehaze-mini](https://huggingface.co/datasets/fengyanzi/8KDehaze_mini), [UHDBlur](https://drive.google.com/drive/folders/1O6JYkOELLhpEkirAnxUB2JGWMqgwVvmX), [4K-Rain13k](https://pan.baidu.com/s/1Kao-OjWNlgg2Jl0Jtl7e5Q?pwd=spfi)
@@ -33,22 +37,32 @@ bash test.sh
 
 
 # Results
-## 4K Image LLIE
-<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-LL_tab.png" width="300px">
+<details>
+<summary><h2>4K Image LLIE</h2></summary>
+<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-LL_tab.png" width="400px">
 <img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-LL.png">
+</details>
 
-## 4K Image Dehazing
-<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-Haze_tab.png" width="300px">
+<details>
+<summary><h2>4K Image Dehazing</h2></summary>
+<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-Haze_tab.png" width="400px">
 <img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-Haze.png">
+</details>
 
-## 8K Image Dehazing
-<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/8KDehaze-mini_tab.png" width="300px">
+<details>
+<summary><h2>8K Image Dehazing</h2></summary>
+<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/8KDehaze-mini_tab.png" width="400px">
 <img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/8KDehaze-mini.png">
+</details>
 
-## 4K Image Deblurring
-<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-Blur_tab.png" width="300px">
+<details>
+<summary><h2>4K Image Deblurring</h2></summary>
+<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-Blur_tab.png" width="400px">
 <img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-Blur.png">
+</details>
 
-## 4K Image Deraining
-<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/4K-Rain13k_tab.png" width="300px">
+<details>
+<summary><h2>4K Image Deraining</h2></summary>
+<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/4K-Rain13k_tab.png" width="400px">
 <img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/4K-Rain13k.png">
+</details>
