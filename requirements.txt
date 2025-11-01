@@ -76,7 +76,7 @@ networkx==3.2.1
 ninja==1.11.1.4
 nodeenv==1.9.1
 numba==0.60.0
-numpy==1.23.5
+numpy>=1.26.4,<1.27.0
 openai-clip==1.0.1
 opencv-python==4.10.0.84
 opencv-python-headless==4.10.0.84
