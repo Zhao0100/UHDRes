@@ -1,13 +1,7 @@
-# GENERATE TIME: Sun Mar  2 15:47:19 2025
-# CMD:
-# /mnt/data/WorkSpace/zsh/UHD2/basicsr/train.py -opt /mnt/data/WorkSpace/zsh/UHD2/options/train_uhdformer.yml --launcher pytorch
-
-# general settings
-name: EHRNet_8K_dehaze
-# name: debug_FeMaSR
-model_type: FADModel
+name: UHDRes_4k_dehaze
+model_type: ImageCleanModel
 scale: &upscale 1
-num_gpu: 2 # set num_gpu: 0 for cpu mode
+num_gpu: 4 # set num_gpu: 0 for cpu mode
 manual_seed: 0
 
 # dataset and data loader settings
@@ -15,13 +9,13 @@ datasets:
   train:
     name: General_Image_Train
     type: PairedImageDataset
-    dataroot_gt: /mnt/data/Workspace/zsh/datasets/UHDformer/8Kdehaze_supermini_processed/train/gt
-    dataroot_lq: /mnt/data/Workspace/zsh/datasets/UHDformer/8Kdehaze_supermini_processed/train/input
+    dataroot_gt: ~
+    dataroot_lq: ~
 
     io_backend:
       type: disk
 
-    gt_size: 1024
+    gt_size: 512
     use_resize_crop: False
     use_flip: False
     use_rot: False
@@ -39,9 +33,9 @@ datasets:
   val:
     name: General_Image_Valid
     type: PairedImageDataset
-    dataroot_gt: /mnt/data/Workspace/zsh/datasets/UHDformer/8Kdehaze_supermini_processed/test/gt
-    dataroot_lq: /mnt/data/Workspace/zsh/datasets/UHDformer/8Kdehaze_supermini_processed/test/input
-    gt_size: 1024
+    dataroot_gt: ~
+    dataroot_lq: ~
+    gt_size: 512
     io_backend:
       type: disk
     geometric_augs: True
@@ -51,22 +45,7 @@ datasets:
 
 # network structures
 network_g:
-  type: EHRNet
-#  gt_resolution: 128
-
-#  channel_query_dict: {8: 256, 16: 256, 32: 256, 64: 128, 128: 64, 256: 32, 512: 32,}
-#  unit_num: 3
-#  number_block: 5
-#  num_heads: 8
-#  match_factor: 4
-#  ffn_expansion_factor: 4
-#  scale_factor: 8
-#  bias: True
-#  LayerNorm_type: 'WithBias'
-#  attention_matching: True
-#  ffn_matching: True
-#  ffn_restormer: False
-
+  type: UHDRes
 
 # path
 path:
@@ -74,7 +53,6 @@ path:
   pretrain_network_g: ~
   pretrain_network_d: ~
   strict_load: false
-#  resume_state: /data_8T1/wangcong/AAAI24/521-UHDformerDehaze/experiments/014_FeMaSR_LQ_stage/training_states/390000.state
   resume_state: ~
 
 
@@ -85,19 +63,14 @@ train:
     lr: !!float 5e-4
     weight_decay: !!float 1e-3
     betas: [0.9, 0.999]
-#  optim_d:
-#    type: Adam
-#    lr: !!float 4e-4
-#    weight_decay: 0
-#    betas: [0.9, 0.99]
 
   scheduler:
     type: CosineAnnealingRestartCyclicLR
-    periods: [10, 10000]
+    periods: [10, 500000]
     restart_weights: [1, 1]
     eta_mins: [0.0005, 0.000001]
 
-  total_iter: 10000
+  total_iter: 500000
   warmup_iter: -1  # no warm up
 
   # losses
@@ -105,39 +78,16 @@ train:
     type: L1Loss
     loss_weight: 1.0
     reduction: mean
-#  pixel_ssim_opt:
-#    loss_weight: !!float 0.25
-#  con_opt:
-#    type: FCRLoss
-#    loss_weight: 0.1
   fft_opt:
     type: FFTLoss
     loss_weight: !!float 0.1
-
-
-#  perceptual_opt:
-#    type: LPIPSLoss
-#    loss_weight: !!float 0
-#
-#  gan_opt:
-#    type: GANLoss
-#    gan_type: hinge
-#    real_label_val: 1.0
-#    fake_label_val: 0.0
-#    loss_weight: 0
-#
-#  codebook_opt:
-#    loss_weight: 0
-#
-#  semantic_opt:
-#    loss_weight: 0
 
   net_d_iters: 0
   net_d_init_iters: !!float 0
 
 # validation settings·
 val:
-  val_freq: !!float 500
+  val_freq: !!float 5000
   save_img: false
 
   key_metric: psnr
@@ -152,21 +102,13 @@ val:
       crop_border: 1
       test_y_channel: true
       color_space: ycbcr
-#    lpips:
-#      type: lpips
-#      better: lower
 
-# logging settings
 logger:
-  print_freq: 50
-  save_checkpoint_freq: !!float 500
-  save_latest_freq: !!float 500
-  show_tf_imgs_freq: !!float 500
+  print_freq: 500
+  save_checkpoint_freq: !!float 5000
+  save_latest_freq: !!float 5000
+  show_tf_imgs_freq: !!float 5000
   use_tb_logger: true
-
-# wandb:
-    # project: ESRGAN
-    # resume_id: ~
 
 dist_params:
   backend: nccl
