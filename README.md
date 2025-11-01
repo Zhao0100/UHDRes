@@ -8,8 +8,16 @@ We propose UHDRes, a UHD image restoration framework solely based on the frequen
 * CUDA 11.8 (or later)
 * PyTorch 2.0.0 (or later)
 ```python
+# git clone this repository
+git clone https://github.com/Zhao0100/UHDRes.git
 cd UHDRes
+
+# create new anaconda env
+conda create -n uhdres python=3.9
+source activate uhdres
+
 pip install -r requirements.txt
+python setup.py develop
 ```
 
 ## Datasets
