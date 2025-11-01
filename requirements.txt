@@ -28,7 +28,6 @@ executing==2.1.0
 facexlib==0.3.0
 filelock==3.13.1
 filterpy==1.4.5
-flash-attn==2.3.1.post1
 fonttools==4.54.1
 fsspec==2024.10.0
 ftfy==6.3.1
