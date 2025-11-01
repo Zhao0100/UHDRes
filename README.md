@@ -4,7 +4,12 @@ We propose UHDRes, a UHD image restoration framework solely based on the frequen
 ![](https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHDRes.png)
 
 
-##Datasets
+## Dependencies and Installation
+* CUDA 11.8 (or later)
+* python 3.8 (or later)
+
+## Datasets
+[UHD-LL](https://drive.google.com/drive/folders/1IneTwBsSiSSVXGoXQ9_hE1cO2d4Fd4DN), [UHD-Haze](https://drive.google.com/drive/folders/1PVCPkhqU_voPVFZj3FzAtUkJnQnF9lSa), [8KDehaze-mini](https://huggingface.co/datasets/fengyanzi/8KDehaze_mini), [UHDBlur](https://drive.google.com/drive/folders/1O6JYkOELLhpEkirAnxUB2JGWMqgwVvmX), [4K-Rain13k](https://pan.baidu.com/s/1Kao-OjWNlgg2Jl0Jtl7e5Q?pwd=spfi)
 
 ## Pretrained Models
 We provide pretrained models for UHD-LL, UHD-Haze, UHD-Blur, and 4K-Rain13k.
@@ -25,6 +30,7 @@ bash train.sh
 ```python
 bash test.sh
 ```
+
 
 # Results
 ## 4K Image LLIE
