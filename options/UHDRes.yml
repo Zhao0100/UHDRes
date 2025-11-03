@@ -17,7 +17,7 @@ datasets:
 
     gt_size: 512
     use_resize_crop: False
-    use_flip: False
+    use_hflip: False
     use_rot: False
 
     # data loader
