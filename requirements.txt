@@ -2,3 +2,4 @@ opencv-python==4.8.1.78
 tqdm
 pyyaml
 tensorboard
+torchmetrics
