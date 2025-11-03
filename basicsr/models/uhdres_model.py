@@ -20,36 +20,6 @@ import cv2
 import torch.nn.functional as F
 from functools import partial
 
-class Mixing_Augment:
-    def __init__(self, mixup_beta, use_identity, device):
-        self.dist = torch.distributions.beta.Beta(torch.tensor([mixup_beta]), torch.tensor([mixup_beta]))
-        self.device = device
-
-        self.use_identity = use_identity
-
-        self.augments = [self.mixup]
-
-    def mixup(self, target, input_):
-        lam = self.dist.rsample((1, 1)).item()
-
-        r_index = torch.randperm(target.size(0)).to(self.device)
-
-        target = lam * target + (1 - lam) * target[r_index, :]
-        input_ = lam * input_ + (1 - lam) * input_[r_index, :]
-
-        return target, input_
-
-    def __call__(self, target, input_):
-        if self.use_identity:
-            augment = random.randint(0, len(self.augments))
-            if augment < len(self.augments):
-                target, input_ = self.augments[augment](target, input_)
-        else:
-            augment = random.randint(0, len(self.augments) - 1)
-            target, input_ = self.augments[augment](target, input_)
-        return target, input_
-
-
 @MODEL_REGISTRY.register()
 class ImageCleanModel(BaseModel):
     """Base Deblur model for single image deblur."""
@@ -58,13 +28,6 @@ class ImageCleanModel(BaseModel):
         super(ImageCleanModel, self).__init__(opt)
 
         # define network
-
-        self.mixing_flag = self.opt['train']['mixing_augs'].get('mixup', False)
-        if self.mixing_flag:
-            mixup_beta = self.opt['train']['mixing_augs'].get('mixup_beta', 1.2)
-            use_identity = self.opt['train']['mixing_augs'].get('use_identity', False)
-            self.mixing_augmentation = Mixing_Augment(mixup_beta, use_identity, self.device)
-
         self.net_g = build_network(deepcopy(opt['network_g']))
         self.net_g = self.model_to_device(self.net_g)
         self.print_network(self.net_g)
