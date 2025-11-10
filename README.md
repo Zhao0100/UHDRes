@@ -76,3 +76,6 @@ bash test.sh
 <img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/4K-Rain13k_tab.png" width="400px">
 <img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/4K-Rain13k.png">
 </details>
+
+# Acknowledgement
+This project is based on [UHDformer](https://github.com/supersupercong/UHDformer)
