@@ -74,7 +74,15 @@ class ImageCleanModel(BaseModel):
                 self.device)
         else:
             raise ValueError('pixel loss are None.')
-
+            
+        if train_opt.get('fft_opt'):
+            pixel_type = train_opt['fft_opt'].pop('type')
+            cri_fft_cls = getattr(loss_module, pixel_type)
+            self.cri_fft = cri_fft_cls(**train_opt['fft_opt']).to(
+                self.device)
+        else:
+            raise ValueError('fft loss are None.')    
+            
         # set up optimizers and schedulers
         self.setup_optimizers()
         self.setup_schedulers()
@@ -123,13 +131,14 @@ class ImageCleanModel(BaseModel):
 
         loss_dict = OrderedDict()
         # pixel loss
-        l_pix = 0.
+        losses = 0.
         for pred in preds:
-            l_pix += self.cri_pix(pred, self.gt)
+            losses += self.cri_pix(pred, self.gt)
+            losses += self.cri_fft(pred, self.gt)
 
-        loss_dict['l_pix'] = l_pix
+        loss_dict['losses'] = losses
 
-        l_pix.backward()
+        losses.backward()
         self.optimizer_g.step()
 
         self.log_dict = self.reduce_loss_dict(loss_dict)
