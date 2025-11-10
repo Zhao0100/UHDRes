@@ -6,7 +6,7 @@ from .losses import (CharbonnierLoss, GANLoss, L1Loss, MSELoss, WeightedTVLoss, 
                      gradient_penalty_loss, r1_penalty)
 
 __all__ = [
-    'L1Loss', 'MSELoss', 'CharbonnierLoss', 'WeightedTVLoss', 'GANLoss', 'gradient_penalty_loss',
+    'L1Loss', 'MSELoss', 'CharbonnierLoss', 'WeightedTVLoss', 'GANLoss', 'gradient_penalty_loss', 'FFTLoss',
     'r1_penalty', 'g_path_regularize'
 ]
 
