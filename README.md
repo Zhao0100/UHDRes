@@ -46,32 +46,46 @@ bash test.sh
 ```
 
 
-# Results
-# Results
-
+## Qualitative Results
 <div align="center">
 
-## 4K Image LLIE
-<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-LL_tab.png" width="400px"><br>
+### 4K Image LLIE
 <img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-LL.png"><br><br>
 
-## 4K Image Dehazing
-<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-Haze_tab.png" width="400px"><br>
+### 4K Image Dehazing
 <img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-Haze.png"><br><br>
 
-## 8K Image Dehazing
-<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/8KDehaze-mini_tab.png" width="400px"><br>
+### 8K Image Dehazing
 <img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/8KDehaze-mini.png"><br><br>
 
-## 4K Image Deblurring
-<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-Blur_tab.png" width="400px"><br>
+### 4K Image Deblurring
 <img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-Blur.png"><br><br>
 
-## 4K Image Deraining
-<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/4K-Rain13k_tab.png" width="400px"><br>
+### 4K Image Deraining
 <img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/4K-Rain13k.png"><br><br>
 
 </div>
+
+## Quantatitive Results
+<div align="center">
+
+### 4K Image LLIE
+<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-LL_tab.png" width="400px"><br>
+
+### 4K Image Dehazing
+<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-Haze_tab.png" width="400px"><br>
+
+### 8K Image Dehazing
+<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/8KDehaze-mini_tab.png" width="400px"><br>
+
+### 4K Image Deblurring
+<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-Blur_tab.png" width="400px"><br>
+
+### 4K Image Deraining
+<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/4K-Rain13k_tab.png" width="400px"><br>
+
+</div>
+
 
 # Citation
 ```
