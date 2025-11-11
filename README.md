@@ -47,35 +47,31 @@ bash test.sh
 
 
 # Results
-<details>
-<summary><h2>4K Image LLIE</h2></summary>
-<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-LL_tab.png" width="400px">
-<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-LL.png">
-</details>
+# Results
 
-<details>
-<summary><h2>4K Image Dehazing</h2></summary>
-<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-Haze_tab.png" width="400px">
-<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-Haze.png">
-</details>
+<div align="center">
 
-<details>
-<summary><h2>8K Image Dehazing</h2></summary>
-<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/8KDehaze-mini_tab.png" width="400px">
-<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/8KDehaze-mini.png">
-</details>
+## 4K Image LLIE
+<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-LL_tab.png" width="400px"><br>
+<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-LL.png"><br><br>
 
-<details>
-<summary><h2>4K Image Deblurring</h2></summary>
-<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-Blur_tab.png" width="400px">
-<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-Blur.png">
-</details>
+## 4K Image Dehazing
+<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-Haze_tab.png" width="400px"><br>
+<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-Haze.png"><br><br>
 
-<details>
-<summary><h2>4K Image Deraining</h2></summary>
-<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/4K-Rain13k_tab.png" width="400px">
-<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/4K-Rain13k.png">
-</details>
+## 8K Image Dehazing
+<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/8KDehaze-mini_tab.png" width="400px"><br>
+<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/8KDehaze-mini.png"><br><br>
+
+## 4K Image Deblurring
+<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-Blur_tab.png" width="400px"><br>
+<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHD-Blur.png"><br><br>
+
+## 4K Image Deraining
+<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/4K-Rain13k_tab.png" width="400px"><br>
+<img src="https://github.com/Zhao0100/UHDRes/blob/main/Figs/4K-Rain13k.png"><br><br>
+
+</div>
 
 # Citation
 ```
