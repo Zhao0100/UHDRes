@@ -78,13 +78,14 @@ bash test.sh
 </details>
 
 # Citation
-```python
+```
 @ARTICLE{UHDRes,
-       author = {{Zhao}, S. and {Lu}, W. and {Wang}, B. and {Wang}, T. and {Zhang}, K. and {Zhao}, H.},
-        title = "{UHDRes: Ultra-High-Definition Image Restoration via Dual-Domain Decoupled Spectral Modulation}",
-      journal = {arXiv e-prints},
-         year = 2025,
+      title={UHDRes: Ultra-High-Definition Image Restoration via Dual-Domain Decoupled Spectral Modulation}, 
+      author={S. Zhao and W. Lu and B. Wang and T. Wang and K. Zhang and H. Zhao},
+      year={2025},
+      eprint={2511.05009},
+      archivePrefix={arXiv},
+      primaryClass={eess.IV},
+      url={https://arxiv.org/abs/2511.05009}, 
 }
-
-
 ```
