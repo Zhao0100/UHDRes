@@ -88,5 +88,3 @@ bash test.sh
 
 
 ```
-# Acknowledgement
-This project is based on [UHDformer](https://github.com/supersupercong/UHDformer)
