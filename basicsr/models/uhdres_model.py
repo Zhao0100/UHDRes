@@ -8,17 +8,47 @@ from basicsr.utils.registry import MODEL_REGISTRY
 
 from basicsr.archs import build_network
 from basicsr.models.base_model import BaseModel
-from basicsr.utils import get_root_logger, imwrite, tensor2img
+from basicsr.utils import get_root_logger, imwrite, tensor2img, img2tensor
 
 loss_module = importlib.import_module('basicsr.losses')
 metric_module = importlib.import_module('basicsr.metrics')
-
+import pyiqa
 import os
 import random
 import numpy as np
 import cv2
 import torch.nn.functional as F
 from functools import partial
+
+class Mixing_Augment:
+    def __init__(self, mixup_beta, use_identity, device):
+        self.dist = torch.distributions.beta.Beta(torch.tensor([mixup_beta]), torch.tensor([mixup_beta]))
+        self.device = device
+
+        self.use_identity = use_identity
+
+        self.augments = [self.mixup]
+
+    def mixup(self, target, input_):
+        lam = self.dist.rsample((1, 1)).item()
+
+        r_index = torch.randperm(target.size(0)).to(self.device)
+
+        target = lam * target + (1 - lam) * target[r_index, :]
+        input_ = lam * input_ + (1 - lam) * input_[r_index, :]
+
+        return target, input_
+
+    def __call__(self, target, input_):
+        if self.use_identity:
+            augment = random.randint(0, len(self.augments))
+            if augment < len(self.augments):
+                target, input_ = self.augments[augment](target, input_)
+        else:
+            augment = random.randint(0, len(self.augments) - 1)
+            target, input_ = self.augments[augment](target, input_)
+        return target, input_
+
 
 @MODEL_REGISTRY.register()
 class ImageCleanModel(BaseModel):
@@ -27,10 +57,18 @@ class ImageCleanModel(BaseModel):
     def __init__(self, opt):
         super(ImageCleanModel, self).__init__(opt)
 
-        # define network
         self.net_g = build_network(deepcopy(opt['network_g']))
         self.net_g = self.model_to_device(self.net_g)
         self.print_network(self.net_g)
+
+        # define metric functions 
+        if self.opt['val'].get('metrics') is not None:
+            self.metric_funcs = {}
+            for _, opt in self.opt['val']['metrics'].items():
+                mopt = opt.copy()
+                name = mopt.pop('type', None)
+                mopt.pop('better', None)
+                self.metric_funcs[name] = pyiqa.create_metric(name, device=self.device, **mopt)
 
         # load pretrained models
         load_path = self.opt['path'].get('pretrain_network_g', None)
@@ -74,15 +112,15 @@ class ImageCleanModel(BaseModel):
                 self.device)
         else:
             raise ValueError('pixel loss are None.')
-            
+
         if train_opt.get('fft_opt'):
             pixel_type = train_opt['fft_opt'].pop('type')
             cri_fft_cls = getattr(loss_module, pixel_type)
             self.cri_fft = cri_fft_cls(**train_opt['fft_opt']).to(
                 self.device)
         else:
-            raise ValueError('fft loss are None.')    
-            
+            raise ValueError('fft loss are None.')        
+
         # set up optimizers and schedulers
         self.setup_optimizers()
         self.setup_schedulers()
@@ -133,10 +171,12 @@ class ImageCleanModel(BaseModel):
         # pixel loss
         losses = 0.
         for pred in preds:
-            losses += self.cri_pix(pred, self.gt)
-            losses += self.cri_fft(pred, self.gt)
+            pixel_loss = self.cri_pix(pred, self.gt)
+            fft_loss = self.cri_fft(pred, self.gt)
+            losses += (pixel_loss + fft_loss)
 
-        loss_dict['losses'] = losses
+        loss_dict['pixel_loss'] = pixel_loss
+        loss_dict['fft_loss'] = fft_loss
 
         losses.backward()
         self.optimizer_g.step()
@@ -163,30 +203,41 @@ class ImageCleanModel(BaseModel):
         if img is None:
             img = self.lq
         net_g = self.get_bare_model(self.net_g)
-        min_size = 384 * 384  # use smaller min_size with limited GPU memory
+        min_size = 8192 * 8192  # use smaller min_size with limited GPU memory
         _, _, h, w = img.shape
         if hasattr(self, 'net_g_ema'):
             self.net_g_ema.eval()
+            # with torch.no_grad():
+            #     pred = self.net_g_ema(img)
+            # if isinstance(pred, list):
+            #     pred = pred[-1]
+            # self.output = pred
             if h * w < min_size:
                 self.output = net_g.test(img)
             else:
                 self.output = net_g.test_tile(img)
         else:
             self.net_g.eval()
+            # with torch.no_grad():
+            #     pred = self.net_g(img)
+            # if isinstance(pred, list):
+            #     pred = pred[-1]
+            # self.output = pred
             if h * w < min_size:
+                # out_img, feature_degradation, self.output = self.net_g(self.lq, feature=feature_degradation)
                 self.output = net_g.test(img)
             else:
                 self.output = net_g.test_tile(img)
             self.net_g.train()
 
-    def dist_validation(self, dataloader, current_iter, tb_logger, save_img, rgb2bgr, use_image):
+    def dist_validation(self, dataloader, current_iter, tb_logger, save_img=False, rgb2bgr=True, use_image=False):
         if os.environ['LOCAL_RANK'] == '0':
             return self.nondist_validation(dataloader, current_iter, tb_logger, save_img, rgb2bgr, use_image)
         else:
             return 0.
 
     def nondist_validation(self, dataloader, current_iter, tb_logger,
-                           save_img, rgb2bgr, use_image):
+                           save_img=False, rgb2bgr=True, use_image=False):
         dataset_name = dataloader.dataset.opt['name']
         with_metrics = self.opt['val'].get('metrics') is not None
         if with_metrics:
@@ -194,7 +245,7 @@ class ImageCleanModel(BaseModel):
                 metric: 0
                 for metric in self.opt['val']['metrics'].keys()
             }
-        # pbar = tqdm(total=len(dataloader), unit='image')
+        pbar = tqdm(total=len(dataloader), unit='image')
 
         window_size = self.opt['val'].get('window_size', 0)
 
@@ -213,6 +264,7 @@ class ImageCleanModel(BaseModel):
 
             visuals = self.get_current_visuals()
             sr_img = tensor2img([visuals['result']], rgb2bgr=rgb2bgr)
+            metric_data = [img2tensor(sr_img).unsqueeze(0) / 255, self.gt]
             if 'gt' in visuals:
                 gt_img = tensor2img([visuals['gt']], rgb2bgr=rgb2bgr)
                 del self.gt
@@ -245,22 +297,30 @@ class ImageCleanModel(BaseModel):
                 imwrite(sr_img, save_img_path)
                 imwrite(gt_img, save_gt_img_path)
 
+            # if with_metrics:
+            #     # calculate metrics
+            #     opt_metric = deepcopy(self.opt['val']['metrics'])
+            #     if use_image:
+            #         for name, opt_ in opt_metric.items():
+            #             metric_type = opt_.pop('type')
+            #             self.metric_results[name] += getattr(
+            #                 metric_module, metric_type)(sr_img, gt_img, **opt_)
+            #     else:
+            #         for name, opt_ in opt_metric.items():
+            #             metric_type = opt_.pop('type')
+            #             self.metric_results[name] += getattr(
+            #                 metric_module, metric_type)(visuals['result'], visuals['gt'], **opt_)
             if with_metrics:
                 # calculate metrics
-                opt_metric = deepcopy(self.opt['val']['metrics'])
-                if use_image:
-                    for name, opt_ in opt_metric.items():
-                        metric_type = opt_.pop('type')
-                        self.metric_results[name] += getattr(
-                            metric_module, metric_type)(sr_img, gt_img, **opt_)
-                else:
-                    for name, opt_ in opt_metric.items():
-                        metric_type = opt_.pop('type')
-                        self.metric_results[name] += getattr(
-                            metric_module, metric_type)(visuals['result'], visuals['gt'], **opt_)
+                for name, opt_ in self.opt['val']['metrics'].items():
+                    tmp_result = self.metric_funcs[name](*metric_data)
+                    self.metric_results[name] += tmp_result.item()            
 
             cnt += 1
+            pbar.update(1)
+            pbar.set_description(f'Test {img_name}')
 
+        pbar.close()
         current_metric = 0.
         if with_metrics:
             for metric in self.metric_results.keys():
