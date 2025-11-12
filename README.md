@@ -1,7 +1,8 @@
 # UHDRes: Ultra-High-Definition Image Restoration via Dual-Domain Decoupled Spectral Modulation
-We propose UHDRes [[arXiv]](https://arxiv.org/abs/2511.05009)
 
-A UHD image restoration framework solely based on the frequency domain and large-kernel convolution. Our method achieves state-of-the-art performance while maintaining high computational efficiency.
+[[arXiv]](https://arxiv.org/abs/2511.05009)
+
+We propose UHDRes, a UHD image restoration framework solely based on the frequency domain and large-kernel convolution. Our method achieves state-of-the-art performance while maintaining high computational efficiency.
 ![](https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHDRes.png)
 
 
