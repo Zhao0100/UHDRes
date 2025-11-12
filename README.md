@@ -1,6 +1,10 @@
-# UHDRes: Ultra-High-Definition Image Restoration via Dual-Domain Decoupled Spectral Modulation
+# 🚀  UHDRes: Ultra-High-Definition Image Restoration via Dual-Domain Decoupled Spectral Modulation
 
-[[arXiv]](https://arxiv.org/abs/2511.05009)
+
+[[📄 arXiv 2511.05009]](https://arxiv.org/abs/2511.05009) [[💻 GitHub Project]](https://github.com/Zhao0100/UHDRes)
+
+> **🔥 New SOTA!** UHDRes achieves **state-of-the-art** performance across **five UHD restoration tasks (4K & 8K)**  
+> with **only 0.40M parameters** — outperforming previous methods up to **+2.3dB PSNR** while using **10× fewer parameters**.
 
 We propose UHDRes, a UHD image restoration framework solely based on the frequency domain and large-kernel convolution. Our method achieves state-of-the-art performance while maintaining high computational efficiency.
 ![](https://github.com/Zhao0100/UHDRes/blob/main/Figs/UHDRes.png)
