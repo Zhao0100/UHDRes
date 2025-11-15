@@ -108,5 +108,4 @@ bash test.sh
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=LonglongaaaGo/VSPBFR&type=Date)](https://star-history.com/#LonglongaaaGo/VSPBFR&Date)
-
+[![Star History Chart](https://api.star-history.com/svg?repos=Zhao0100/UHDRes&type=date&legend=top-left)](https://www.star-history.com/#Zhao0100/UHDRes&type=date&legend=top-left)
