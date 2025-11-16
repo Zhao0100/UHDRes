@@ -346,13 +346,13 @@ def visualize_erf(MODEL: nn.Module = None, num_images=231, data_path="path_UHDde
     return avg_grad_map # Return the accumulated map
 
 
-from model_zoo.ehrnet import buildEHRNet
+from uhdres import buildUHDRes
 
 if __name__ == '__main__':
     showpath = os.path.join(os.path.dirname(os.path.abspath(__file__)), "show/erf")
     os.makedirs(showpath, exist_ok=True)
 
-    init_model = buildEHRNet()
+    init_model = buildUHDRes()
 
     ckpt_path = 'pretrained_model'
 
