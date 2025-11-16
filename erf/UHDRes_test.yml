@@ -1,0 +1,45 @@
+# general settings
+name: UHDRes_test
+model_type: ImageCleanModel
+scale: 1
+num_gpu: 1
+manual_seed: 10
+
+datasets:
+  test_1:  # the 1st test dataset
+    name: Valset
+    type: PairedImageDataset
+    dataroot_gt: ~
+    dataroot_lq: ~
+    filename_tmpl: '{}'
+    io_backend:
+      type: disk
+
+
+# network structures
+network_g:
+  type: UHDRes
+
+# path
+path:
+  pretrain_network_g: ~
+  strict_load_g: true
+
+# validation settings
+val:
+  save_img: false
+  suffix: ~  # add suffix to saved images, if None, use exp name
+
+  metrics:
+    psnr: # metric name, can be arbitrary
+      type: calculate_psnr
+      crop_border: 1
+      test_y_channel: true
+      color_space: ycbcr
+
+    ssim:
+      type: calculate_ssim
+      crop_border: 1
+      test_y_channel: true
+      color_space: ycbcr
+
