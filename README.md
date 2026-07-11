@@ -3,6 +3,7 @@
 
 [[TCSVT2026]](https://ieeexplore.ieee.org/document/11579382) [[📄 arXiv 2511.05009]](https://arxiv.org/abs/2511.05009) [[💻 GitHub Project]](https://github.com/Zhao0100/UHDRes)      [[🍍知乎]](https://zhuanlan.zhihu.com/p/1971881443413189240)
 
+> **July 2026 🔥 Publication!** UHDRes has been published in **IEEE Transactions on Circuits and Systems for Video Technology**.
 > **Nov. 2025 🔥 New SOTA!** UHDRes achieves **state-of-the-art** performance across **five UHD restoration tasks (4K & 8K)**  
 > with **only 0.40M parameters** — outperforming previous methods up to **+2.3dB PSNR** while using **10× fewer parameters**.
 
